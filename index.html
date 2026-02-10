@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毓佛活動中心暨大仙紀念館興建工程 | 募資計畫</title>
+    <style>
+        /* --- 基礎設定與配色變數 --- */
+        :root {
+            /* 您的配色偏好：米色、奶油白、淺青、淺綠 */
+            --bg-color: #F5F5DC;       /* 米色背景 */
+            --card-bg: #FFFAF0;        /* 奶油白區塊 */
+            --text-main: #2C3E50;      /* 深藍灰文字 (易讀) */
+            --accent-cyan: #E0F7FA;    /* 淺青色 (裝飾) */
+            --accent-green: #A5D6A7;   /* 淺綠色 (進度條) */
+            --btn-color: #4DB6AC;      /* 按鈕/重點色 */
+            --border-color: #D7CCC8;   /* 邊框色 */
+            
+            /* 字體大小設定：確保大於 14pt (約 19px) */
+            --font-base: 20px; 
+            --font-h1: 36px;
+            --font-h2: 28px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8; /* 增加行高，提升閱讀舒適度 */
+            font-size: var(--font-base); /* 符合您的大字體要求 */
+            padding-bottom: 50px;
+        }
+
+        /* --- 容器設定 --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- 1. Hero 區塊 (動態藍圖背景) --- */
+        header {
+            background: linear-gradient(135deg, var(--bg-color) 25%, transparent 25%) -50px 0,
+                        linear-gradient(225deg, var(--bg-color) 25%, transparent 25%) -50px 0,
+                        linear-gradient(315deg, var(--bg-color) 25%, transparent 25%),
+                        linear-gradient(45deg, var(--bg-color) 25%, transparent 25%);
+            background-size: 100px 100px;
+            background-color: #EFEBE9; /* 底色 */
+            position: relative;
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 5px solid var(--accent-green);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 純 CSS 動畫：模擬藍圖線條流動 */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(77, 182, 172, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77, 182, 172, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveGrid 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        header h1 {
+            font-size: var(--font-h1);
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 0px #fff;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            position: relative;
+            z-index: 2;
+            font-size: 22px;
+            color: #555;
+            background: rgba(255,255,255,0.6);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* --- 通用卡片樣式 --- */
+        section {
+            background: var(--card-bg);
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: var(--font-h2);
+            color: #00695C; /* 深青色標題 */
+            border-left: 8px solid var(--accent-green);
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* --- 2. 募資進度條 (重點功能) --- */
+        .progress-container {
+            position: relative;
+            margin: 50px 0;
+        }
+
+        .progress-bar-bg {
+            background-color: #E0E0E0;
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 實際進度 (動態寬度) */
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent-green), var(--btn-color));
+            height: 100%;
+            width: 15%; /* ★請在此處修改目前進度百分比 (例如 450萬/3000萬 = 15%) */
+            border-radius: 20px 0 0 20px;
+            transition: width 1s ease-in-out;
+            position: relative;
+            /* 讓進度條有流光動畫 */
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* 節點標示 (動工/完工) */
+        .milestone {
+            position: absolute;
+            top: -45px; /* 在進度條上方 */
+            transform: translateX(-50%);
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .milestone::after {
+            content: '▼';
+            display: block;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .m-start { left: 33.3%; color: #d35400; } /* 1000萬位置 (33%) */
+        .m-end { right: 0; transform: translateX(0); color: #2E7D32; } /* 3000萬位置 */
+
+        .current-amount {
+            font-size: 24px;
+            color: var(--btn-color);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .gap-info {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #666;
+            background: var(--accent-cyan);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        /* --- 3. 建築圖展示 (Grid 佈局) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px dashed var(--border-color);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-style: solid;
+            border-color: var(--accent-green);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 20px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            /* 這裡可以放您的圖片 img 標籤 */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="%23ccc">預覽圖</text></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* --- 4. 捐款資訊區 --- */
+        .donation-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-between;
+        }
+
+        .bank-info {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .bank-details {
+            background: #fff;
+            padding: 20px;
+            border-left: 5px solid var(--btn-color);
+            font-size: 22px; /* 更大的字體顯示帳號 */
+        }
+
+        .qr-area {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            background: var(--accent-cyan);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            margin: 0 auto 10px auto;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 16px;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+        }
+
+        /* 手機版調整 */
+        @media (max-width: 768px) {
+            .milestone { font-size: 14px; top: -55px; }
+            .donation-flex { flex-direction: column; }
+            header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>毓佛活動中心暨大仙紀念館<br>興建工程</h1>
+        <p>凝聚善念 · 共築福田</p>
+    </header>
+
+    <section>
+        <h2>當前工程募款進度</h2>
+        
+        <div class="current-amount">
+            目前累計金額：<span style="color:#d35400; font-size:32px;">475 萬元</span><span>(每月1號更新)</span>
+        </div>
+<br>
+        <div class="progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-fill" style="width: 16%;"></div>
+            </div>
+
+            <div class="milestone m-start" style="left: 33.3%;">
+                第一階段：動工門檻<br>1,000 萬元
+            </div>
+
+            <div class="milestone m-end">
+                總完工目標<br>3,000 萬元
+            </div>
+        </div>
+
+        <div class="gap-info">
+            <strong>距離動工目標還差：</strong> <span style="color:#d35400; font-weight:bold;">525 萬元</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>建築藍圖與 3D 設計</h2>
+        <p style="margin-bottom: 20px;">這是一座融合現代與傳統的綠建築設計。</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    (待上傳)<br>3D 外觀設計圖
+                </div>
+                <p>莊嚴外觀示意</p>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    (待上傳)<br>一樓平面藍圖
+                </div>
+                <p>一樓活動中心規劃</p>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    (待上傳)<br>二樓平面藍圖
+                </div>
+                <p>二樓紀念館規劃</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>多元捐款管道</h2>
+        <div class="donation-flex">
+            
+            <div class="bank-info">
+                <h3>銀行匯款</h3>
+                <p>請確認以下帳號資訊：</p>
+                <div class="bank-details">
+                    <p><strong>銀行代碼：</strong> 700 (中華郵政)</p>
+                    <p><strong>帳戶名稱：</strong> 陳美鑾</p>
+                    <p><strong>匯款帳號：</strong> 01913350007762</p> </div>
+                
+                <h3 style="margin-top:20px;">收款存摺封面</h3>
+                <div class="gallery-placeholder" style="height: 150px; background-color: #fff; border: 1px solid #ccc;">
+                    (待上傳存摺封面圖片)
+                </div>
+            </div>
+
+            <div class="qr-area">
+                <h3>數位支付 / 掃碼捐款</h3>
+                <div class="qr-placeholder">
+                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TWQRP%3A%2F%2F700NTTransfer%2F158%2F02%2FV1%3FD6%3D0001913350007762%26D5%3D700%26D9%3D%E5%96%84%E6%AC%BE%E8%AB%8B%E5%89%8D%E8%B3%A2%E7%95%99%E4%B8%8B%E5%A7%93%E5%90%8D%26D10%3D901" alt="QR Code">
+
+                </div>
+                <p>支援 台灣 Pay</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 毓佛活動中心暨大仙紀念館興建工程委員會</p>
+    <p>聯絡電話： (06) 723-5140</p>
+</footer>
+
+</body>
+</html>
