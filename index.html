@@ -7,16 +7,18 @@
     <style>
         /* --- 基礎設定與配色變數 --- */
         :root {
-            /* 您的配色偏好：米色、奶油白、淺青、淺綠 */
+            /* 配色：米色、奶油白、淺青、淺綠、慶典 accents */
             --bg-color: #F5F5DC;       /* 米色背景 */
             --card-bg: #FFFAF0;        /* 奶油白區塊 */
-            --text-main: #2C3E50;      /* 深藍灰文字 (易讀) */
-            --accent-cyan: #E0F7FA;    /* 淺青色 (裝飾) */
-            --accent-green: #A5D6A7;   /* 淺綠色 (進度條) */
+            --text-main: #2C3E50;      /* 深藍灰文字 */
+            --accent-cyan: #E0F7FA;    /* 淺青色 */
+            --accent-green: #A5D6A7;   /* 淺綠色 */
             --btn-color: #4DB6AC;      /* 按鈕/重點色 */
             --border-color: #D7CCC8;   /* 邊框色 */
+            --celebrate-gold: #D4AF37; /* 慶典金色 */
+            --celebrate-red: #C0392B;  /* 慶典紅/喜慶色 */
             
-            /* 字體大小設定：確保大於 14pt (約 19px) */
+            /* 字體大小設定 (符合大字體要求 >14pt) */
             --font-base: 20px; 
             --font-h1: 36px;
             --font-h2: 28px;
@@ -32,35 +34,33 @@
             font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.8; /* 增加行高，提升閱讀舒適度 */
-            font-size: var(--font-base); /* 符合您的大字體要求 */
+            line-height: 1.8;
+            font-size: var(--font-base);
             padding-bottom: 50px;
         }
 
-        /* --- 容器設定 --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* --- 1. Hero 區塊 (動態藍圖背景) --- */
+        /* --- 1. Hero 區塊 (藍圖背景) --- */
         header {
             background: linear-gradient(135deg, var(--bg-color) 25%, transparent 25%) -50px 0,
                         linear-gradient(225deg, var(--bg-color) 25%, transparent 25%) -50px 0,
                         linear-gradient(315deg, var(--bg-color) 25%, transparent 25%),
                         linear-gradient(45deg, var(--bg-color) 25%, transparent 25%);
             background-size: 100px 100px;
-            background-color: #EFEBE9; /* 底色 */
+            background-color: #EFEBE9;
             position: relative;
             text-align: center;
-            padding: 80px 20px;
+            padding: 70px 20px 60px 20px;
             border-bottom: 5px solid var(--accent-green);
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* 純 CSS 動畫：模擬藍圖線條流動 */
         header::before {
             content: '';
             position: absolute;
@@ -92,13 +92,182 @@
             z-index: 2;
             font-size: 22px;
             color: #555;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.7);
             display: inline-block;
-            padding: 5px 15px;
+            padding: 6px 20px;
             border-radius: 20px;
         }
 
-        /* --- 通用卡片樣式 --- */
+        /* --- 喜慶熱烈公告卡片 --- */
+        .celebration-banner {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF0D4 100%);
+            border: 2px solid #F39C12;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0 10px 0;
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .celebration-badge {
+            display: inline-block;
+            background-color: var(--celebrate-red);
+            color: #FFF;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 6px 18px;
+            border-radius: 30px;
+            box-shadow: 0 3px 8px rgba(192, 57, 43, 0.3);
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .celebration-title {
+            font-size: 28px;
+            color: #B7950B;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .event-box {
+            background: rgba(255,255,255,0.85);
+            border-left: 6px solid #E67E22;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .event-box h3 {
+            font-size: 24px;
+            color: #C0392B;
+            margin-bottom: 10px;
+        }
+
+        /* --- 動態漂浮/替換心得句子 (HTML5 + CSS + Vanilla JS) --- */
+        .floating-quotes-section {
+            background: linear-gradient(180deg, #E0F7FA 0%, #E8F5E9 100%);
+            border: 2px dashed #4DB6AC;
+            border-radius: 15px;
+            padding: 30px 25px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .floating-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #00695C;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* 漂浮泡泡動畫裝飾 */
+        .bubble-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: floatUp 8s infinite ease-in-out;
+        }
+        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 7s; }
+        .bubble:nth-child(2) { width: 25px; height: 25px; left: 85%; animation-duration: 9s; animation-delay: 2s; }
+        .bubble:nth-child(3) { width: 50px; height: 50px; left: 70%; animation-duration: 11s; animation-delay: 1s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100px) scale(0.8); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-80px) scale(1.1); opacity: 0; }
+        }
+
+        .quote-ticker-container {
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .quote-card {
+            position: absolute;
+            width: 100%;
+            max-width: 850px;
+            padding: 20px 30px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,105,92,0.1);
+            font-size: 22px;
+            color: #004D40;
+            font-weight: 500;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px) scale(0.96);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+        }
+
+        .quote-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            animation: floatGently 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatGently {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+
+        .quote-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #B2DFDB;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dot.active {
+            background-color: #00796B;
+            transform: scale(1.3);
+        }
+
+        /* --- 通用 Section 卡片樣式 --- */
         section {
             background: var(--card-bg);
             margin: 40px 0;
@@ -110,13 +279,13 @@
 
         h2 {
             font-size: var(--font-h2);
-            color: #00695C; /* 深青色標題 */
+            color: #00695C;
             border-left: 8px solid var(--accent-green);
             padding-left: 15px;
             margin-bottom: 30px;
         }
 
-        /* --- 2. 募資進度條 (重點功能) --- */
+        /* --- 募資進度條區塊 --- */
         .progress-container {
             position: relative;
             margin: 50px 0;
@@ -131,15 +300,13 @@
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* 實際進度 (動態寬度) */
         .progress-fill {
-            background: linear-gradient(90deg, var(--accent-green), var(--btn-color));
+            background: linear-gradient(90deg, #A5D6A7, #4DB6AC, #26A69A);
             height: 100%;
-            width: 30%; /* ★請在此處修改目前進度百分比 (例如 645萬/3000萬 = 21%) */
+            width: 34.3%; /* 破千萬目標比例 */
             border-radius: 20px 0 0 20px;
-            transition: width 1s ease-in-out;
+            transition: width 1.2s ease-in-out;
             position: relative;
-            /* 讓進度條有流光動畫 */
             background-size: 200% 100%;
             animation: shimmer 3s infinite linear;
         }
@@ -149,10 +316,9 @@
             100% { background-position: -200% 0; }
         }
 
-        /* 節點標示 (動工/完工) */
         .milestone {
             position: absolute;
-            top: -45px; /* 在進度條上方 */
+            top: -45px;
             transform: translateX(-50%);
             text-align: center;
             font-weight: bold;
@@ -166,8 +332,8 @@
             margin-top: 5px;
         }
 
-        .m-start { left: 33.3%; color: #d35400; } /* 1000萬位置 (33%) */
-        .m-end { right: 0; transform: translateX(0); color: #2E7D32; } /* 3000萬位置 */
+        .m-start { left: 33.3%; color: #C0392B; }
+        .m-end { right: 0; transform: translateX(0); color: #2E7D32; }
 
         .current-amount {
             font-size: 24px;
@@ -181,13 +347,48 @@
             text-align: center;
             margin-top: 15px;
             font-size: 18px;
-            color: #666;
-            background: var(--accent-cyan);
-            padding: 10px;
+            color: #27AE60;
+            background: #E8F8F5;
+            padding: 12px;
             border-radius: 8px;
+            border: 1px solid #A3E4D7;
         }
 
-        /* --- 3. 建築圖展示 (Grid 佈局) --- */
+        /* --- 故事牆 / 見證區卡片 --- */
+        .story-card {
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 6px solid #4DB6AC;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-top: 20px;
+        }
+
+        .story-title {
+            font-size: 26px;
+            color: #00695C;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed #E0F7FA;
+            padding-bottom: 10px;
+        }
+
+        .story-text p {
+            margin-bottom: 18px;
+            font-size: 20px;
+            color: #34495E;
+        }
+
+        .story-quote {
+            background: #F4FBFB;
+            padding: 18px 22px;
+            border-radius: 8px;
+            border-left: 4px solid #26A69A;
+            margin: 15px 0;
+            font-style: normal;
+        }
+
+        /* --- 建築圖展示 (Grid 佈局) --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -209,24 +410,7 @@
             border-color: var(--accent-green);
         }
 
-        .gallery-placeholder {
-            width: 100%;
-            height: 250px;
-            background-color: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #aaa;
-            font-size: 20px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            /* 這裡可以放您的圖片 img 標籤 */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="%23ccc">預覽圖</text></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        /* --- 4. 捐款資訊區 --- */
+        /* --- 捐款資訊區 --- */
         .donation-flex {
             display: flex;
             flex-wrap: wrap;
@@ -243,7 +427,7 @@
             background: #fff;
             padding: 20px;
             border-left: 5px solid var(--btn-color);
-            font-size: 22px; /* 更大的字體顯示帳號 */
+            font-size: 22px;
         }
 
         .qr-area {
@@ -275,11 +459,12 @@
             margin-top: 40px;
         }
 
-        /* 手機版調整 */
         @media (max-width: 768px) {
             .milestone { font-size: 14px; top: -55px; }
             .donation-flex { flex-direction: column; }
             header h1 { font-size: 28px; }
+            .celebration-title { font-size: 22px; }
+            .quote-card { font-size: 18px; padding: 15px; }
         }
     </style>
 </head>
@@ -292,20 +477,77 @@
         <p>凝聚善念 · 共築福田</p>
     </header>
 
+    <!-- 喜慶公告區塊 -->
+    <div class="celebration-banner">
+        <span class="celebration-badge">🎉 喜報滿門 · 感恩迴響</span>
+        <div class="celebration-title">
+            <span>8/1 歡慶募資突破千萬大關！</span>
+        </div>
+        <p style="font-size: 22px; color: #5D4037; margin-bottom: 10px;">
+            誠摯分享捐款人心得與見證，希望感動更多人發善心、共襄盛舉！
+        </p>
+
+        <!-- 中秋連假晚會預告 -->
+        <div class="event-box">
+            <h3>🌕 節目精彩預告：中秋連假晚會</h3>
+            <p><strong>時間：</strong>9/25(五) 中秋連假第一天晚會</p>
+            <p><strong>大戲上演：</strong>中秋大戲《古井運木》濟公傳</p>
+            <p style="margin-top: 8px; color: #795548; font-weight: 500;">
+                歡迎闔家蒞臨觀賞，心存善念捐助善款，人人都可以是海陸空富貴版圖皆收容的張員外！
+            </p>
+        </div>
+    </div>
+
+    <!-- 動態漂浮/替換心得句子 (HTML5 互動動畫) -->
+    <div class="floating-quotes-section">
+        <div class="bubble-bg">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+
+        <div class="floating-title">
+            <span>✨ 捐款人真心話 (動態感言牆)</span>
+        </div>
+
+        <div class="quote-ticker-container" id="quoteContainer">
+            <div class="quote-card active">
+                「當我看到白宮禮堂未來外觀示意圖的那一刻，心裡真的覺得這筆捐款太值得了！」
+            </div>
+            <div class="quote-card">
+                「希望禮堂落成後，讓小天使們有一個快樂學習的空間，也讓資深前賢們有更無礙的活動動線。」
+            </div>
+            <div class="quote-card">
+                「中大型場地的氣勢，能讓來訪的新朋友心生嚮往與溫馨。」
+            </div>
+            <div class="quote-card">
+                「這是一份傳承，希望未來的大仙紀念館，也能讓後學們永遠心存感恩。」
+            </div>
+        </div>
+
+        <div class="quote-dots" id="quoteDots">
+            <span class="dot active" onclick="setQuote(0)"></span>
+            <span class="dot" onclick="setQuote(1)"></span>
+            <span class="dot" onclick="setQuote(2)"></span>
+            <span class="dot" onclick="setQuote(3)"></span>
+        </div>
+    </div>
+
+    <!-- 募資進度 -->
     <section>
         <h2>當前工程募款進度</h2>
         
         <div class="current-amount">
-            目前累計金額：<span style="color:#d35400; font-size:32px;"> 9,171,599 元</span><span>(每月1號更新)</span>
+            目前累計金額：<span style="color:#C0392B; font-size:34px; font-weight: bold;"> 10,506,996 元</span> <span>(慶祝破千萬！更新於 8/1)</span>
         </div>
-<br>
+        <br>
         <div class="progress-container">
             <div class="progress-bar-bg">
-                <div class="progress-fill" style="width: 30%;"></div>
+                <div class="progress-fill" style="width: 35.1%;"></div>
             </div>
 
             <div class="milestone m-start" style="left: 33.3%;">
-                第一階段：動工門檻<br>1,000 萬元
+                第一階段：動土門檻<br><span style="color:#27AE60;">(已順利達標！)</span><br>1,000 萬元
             </div>
 
             <div class="milestone m-end">
@@ -314,58 +556,63 @@
         </div>
 
         <div class="gap-info">
-            <strong>距離動工目標還差：</strong> <span style="color:#d35400; font-weight:bold;"> 83 萬元</span>
+            🎉 <strong>第一階段動土門檻 1,000 萬已順利突破！</strong> 朝向總目標 3,000 萬元持續邁進！
         </div>
     </section>
 
-   <section>
-
-    <h2>建築藍圖與 3D 設計</h2>
-
-    <p style="margin-bottom: 20px;">這是一座融合現代與傳統的複合式建築空間設計。</p>
-
-    
-
-    <div class="gallery-grid">
-
-        <div class="gallery-item">
-
-            <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image1.jpg" 
-
-                 alt="3D 外觀設計圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
-
-            <p>活動中心外觀示意</p>
-
+    <!-- 捐款人故事牆 / 見證區 -->
+    <section>
+        <h2>捐款人故事牆 / 見證區</h2>
+        
+        <div class="story-card">
+            <div class="story-title">
+                【看見未來的三十年，為小天使與長輩築一個家】
+            </div>
+            <div class="story-text">
+                <p>
+                    走過三十週年，看著毓佛宮的道務日益繁盛，每場活動動輒破百人，原有的二樓大殿早已不敷使用。
+                </p>
+                <div class="story-quote">
+                    「當我看到白宮禮堂未來外觀示意圖的那一刻，心裡真的覺得這筆捐款太值得了！」捐款人感動地分享。
+                </div>
+                <p>
+                    她期待禮堂落成後，不僅能讓小天使們有一個快樂學習的空間，更重要的是，讓那些資深、行動不便的前賢們，能擁有更舒適、無礙的活動動線。
+                </p>
+                <div class="story-quote">
+                    「中大型場地的氣勢，能讓來訪的新朋友心生嚮往與溫馨。這是一份傳承，希望未來的大仙紀念館，也能讓後學們永遠心存感恩。」
+                </div>
+            </div>
         </div>
+    </section>
 
+    <!-- 建築藍圖與 3D 設計 -->
+    <section>
+        <h2>建築藍圖與 3D 設計</h2>
 
+        <p style="margin-bottom: 20px;">這是一座融合現代與傳統的複合式建築空間設計。</p>
 
-        <div class="gallery-item">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image1.jpg" 
+                     alt="3D 外觀設計圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
+                <p>活動中心外觀示意</p>
+            </div>
 
-            <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image2.jpg" 
+            <div class="gallery-item">
+                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image2.jpg" 
+                     alt="外觀設計圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
+                <p>外觀設計圖停車空間</p>
+            </div>
 
-                 alt="外觀設計圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
-
-            <p>外觀設計圖停車空間</p>
-
+            <div class="gallery-item">
+                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image3.jpg" 
+                     alt="二樓平面藍圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
+                <p>外觀設計圖</p>
+            </div>
         </div>
+    </section>
 
-
-
-        <div class="gallery-item">
-
-            <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image3.jpg" 
-
-                 alt="二樓平面藍圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
-
-            <p>外觀設計圖</p>
-
-        </div>
-
-    </div>
-
-</section>
-
+    <!-- 多元捐款管道 -->
     <section>
         <h2>多元捐款管道</h2>
         <div class="donation-flex">
@@ -376,20 +623,21 @@
                 <div class="bank-details">
                     <p><strong>銀行代碼：</strong> 700 (中華郵政)</p>
                     <p><strong>帳戶名稱：</strong> 陳美鑾</p>
-                    <p><strong>匯款帳號：</strong> 01913350007762</p> </div>
+                    <p><strong>匯款帳號：</strong> 01913350007762</p>
+                </div>
                 
                 <h3 style="margin-top:20px;">收款存摺封面</h3>
-<div class="bank-details" style="padding: 10px; background-color: #fff; text-align: center;">
-    <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image4.jpg" 
-         alt="收款存摺封面" 
-         style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-</div>
+                <div class="bank-details" style="padding: 10px; background-color: #fff; text-align: center;">
+                    <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image4.jpg" 
+                         alt="收款存摺封面" 
+                         style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                </div>
+            </div>
 
             <div class="qr-area">
                 <h3>數位支付 / 掃碼捐款</h3>
                 <div class="qr-placeholder">
-                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TWQRP%3A%2F%2F700NTTransfer%2F158%2F02%2FV1%3FD6%3D0001913350007762%26D5%3D700%26D10%3D901" alt="QR Code">
-
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TWQRP%3A%2F%2F700NTTransfer%2F158%2F02%2FV1%3FD6%3D0001913350007762%26D5%3D700%26D10%3D901" alt="QR Code">
                 </div>
                 <p>支援 台灣 Pay</p>
             </div>
@@ -403,9 +651,38 @@
     <p>聯絡電話： (06) 723-5140</p>
 </footer>
 
+<!-- 靜態動態化 HTML5 腳本：自動旋轉漂浮心得牆 -->
+<script>
+    let currentQuoteIndex = 0;
+    const quotes = document.querySelectorAll('.quote-card');
+    const dots = document.querySelectorAll('.dot');
+    let autoRotateTimer;
+
+    function setQuote(index) {
+        quotes.forEach((q, i) => {
+            q.classList.remove('active');
+            dots[i].classList.remove('active');
+        });
+        currentQuoteIndex = index;
+        quotes[currentQuoteIndex].classList.add('active');
+        dots[currentQuoteIndex].classList.add('active');
+        
+        resetTimer();
+    }
+
+    function nextQuote() {
+        let nextIndex = (currentQuoteIndex + 1) % quotes.length;
+        setQuote(nextIndex);
+    }
+
+    function resetTimer() {
+        clearInterval(autoRotateTimer);
+        autoRotateTimer = setInterval(nextQuote, 4500); // 每4.5秒自動流暢輪播
+    }
+
+    // 啟動自動輪播
+    resetTimer();
+</script>
+
 </body>
-
 </html>
-
-
-
