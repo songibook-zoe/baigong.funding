@@ -7,7 +7,6 @@
     <style>
         /* --- 基礎設定與配色變數 --- */
         :root {
-            /* 配色：米色、奶油白、淺青、淺綠、慶典 accents */
             --bg-color: #F5F5DC;       /* 米色背景 */
             --card-bg: #FFFAF0;        /* 奶油白區塊 */
             --text-main: #2C3E50;      /* 深藍灰文字 */
@@ -155,7 +154,7 @@
             margin-bottom: 10px;
         }
 
-        /* --- 動態漂浮/替換心得句子 (HTML5 + CSS + Vanilla JS) --- */
+        /* --- 募資進度動態報告牆 (HTML5 互動動畫) --- */
         .floating-quotes-section {
             background: linear-gradient(180deg, #E0F7FA 0%, #E8F5E9 100%);
             border: 2px dashed #4DB6AC;
@@ -179,7 +178,6 @@
             gap: 8px;
         }
 
-        /* 漂浮泡泡動畫裝飾 */
         .bubble-bg {
             position: absolute;
             width: 100%;
@@ -207,7 +205,7 @@
 
         .quote-ticker-container {
             position: relative;
-            min-height: 120px;
+            min-height: 160px; /* 增加高度以容納較長的會議紀錄 */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -222,7 +220,7 @@
             background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,105,92,0.1);
-            font-size: 22px;
+            font-size: 20px;
             color: #004D40;
             font-weight: 500;
             line-height: 1.6;
@@ -230,6 +228,19 @@
             transform: translateY(20px) scale(0.96);
             transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             pointer-events: none;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background-color: #00796B;
+            color: #FFFFFF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .quote-card.active {
@@ -265,6 +276,146 @@
         .dot.active {
             background-color: #00796B;
             transform: scale(1.3);
+        }
+
+        /* --- 中秋義賣特別企劃 (北歐木質調 x 中秋光暈) --- */
+        .midautumn-section {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FCEABB 100%);
+            border: 2px solid #F3D186;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 25px rgba(217, 108, 74, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            gap: 30px;
+        }
+        
+        .midautumn-bg-glow {
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .midautumn-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .midautumn-badge {
+            background-color: #D96C4A;
+            color: #FFF;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .midautumn-title {
+            font-size: 34px;
+            color: #4A3F35;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border: none;
+            padding-left: 0;
+            font-family: serif;
+        }
+        
+        .midautumn-subtitle {
+            font-size: 22px;
+            color: #D96C4A;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .midautumn-text {
+            font-size: 20px;
+            color: #6B5E55;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .midautumn-account-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid #E8DCC4;
+            padding: 20px;
+            border-radius: 12px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+        
+        .account-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #8BA888;
+            margin-bottom: 8px;
+        }
+        
+        .account-number {
+            font-size: 22px;
+            color: #4A3F35;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        
+        .account-name {
+            font-size: 16px;
+            color: #6B5E55;
+            margin-top: 5px;
+        }
+        
+        .midautumn-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            min-width: 200px;
+        }
+        
+        .mooncake-icon {
+            width: 140px;
+            height: 140px;
+            background: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border: 5px solid #F3D186;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05), 0 4px 15px rgba(243, 209, 134, 0.4);
+            margin-bottom: 20px;
+        }
+        
+        .midautumn-btn {
+            background: #8BA888;
+            color: #FFF;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(139, 168, 136, 0.3);
+            width: 100%;
+        }
+        
+        .midautumn-btn:hover {
+            background: #728E6F;
+            transform: translateY(-2px);
         }
 
         /* --- 通用 Section 卡片樣式 --- */
@@ -303,17 +454,12 @@
         .progress-fill {
             background: linear-gradient(90deg, #A5D6A7, #4DB6AC, #26A69A);
             height: 100%;
-            width: 34.3%; /* 破千萬目標比例 */
+            width: 36%; /* 10814132 / 30000000 約等於 36% */
             border-radius: 20px 0 0 20px;
             transition: width 1.2s ease-in-out;
             position: relative;
             background-size: 200% 100%;
             animation: shimmer 3s infinite linear;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
         }
 
         .milestone {
@@ -388,7 +534,7 @@
             font-style: normal;
         }
 
-        /* --- 建築圖展示 (Grid 佈局) --- */
+        /* --- 建築圖展示 --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -465,6 +611,13 @@
             header h1 { font-size: 28px; }
             .celebration-title { font-size: 22px; }
             .quote-card { font-size: 18px; padding: 15px; }
+            
+            .midautumn-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .midautumn-title { font-size: 28px; }
+            .midautumn-account-box { display: block; }
         }
     </style>
 </head>
@@ -481,10 +634,10 @@
     <div class="celebration-banner">
         <span class="celebration-badge">🎉 喜報滿門 · 感恩迴響</span>
         <div class="celebration-title">
-            <span>8/1 歡慶募資突破千萬大關！</span>
+            <span>歡慶募資突破千萬大關！</span>
         </div>
         <p style="font-size: 22px; color: #5D4037; margin-bottom: 10px;">
-            誠摯分享捐款人心得與見證，希望感動更多人發善心、共襄盛舉！
+            誠摯分享最新建案進度與活動資訊，希望感動更多人發善心、共襄盛舉！
         </p>
 
         <!-- 中秋連假晚會預告 -->
@@ -498,7 +651,7 @@
         </div>
     </div>
 
-    <!-- 動態漂浮/替換心得句子 (HTML5 互動動畫) -->
+    <!-- 募資進度動態報告牆 (HTML5 互動動畫) -->
     <div class="floating-quotes-section">
         <div class="bubble-bg">
             <div class="bubble"></div>
@@ -507,21 +660,25 @@
         </div>
 
         <div class="floating-title">
-            <span>✨ 捐款人真心話 (動態感言牆)</span>
+            <span>✨ 募資進度動態報告牆</span>
         </div>
 
         <div class="quote-ticker-container" id="quoteContainer">
             <div class="quote-card active">
-                「當我看到白宮禮堂未來外觀示意圖的那一刻，心裡真的覺得這筆捐款太值得了！」
+                <span class="date-badge">2026/07/31</span><br>
+                狂賀募資進度突破 1000 萬元，好消息！
             </div>
             <div class="quote-card">
-                「希望禮堂落成後，讓小天使們有一個快樂學習的空間，也讓資深前賢們有更無礙的活動動線。」
+                <span class="date-badge">2026/08/04</span><br>
+                週二晚上道務會議臨時動議，點傳師們拍板決議：「破一千萬了！我們往把舊白宮建物剷平，整治好蟲害工作，然後把動土的紅樁釘下去為起始目標！拆吧！動土吧！」
             </div>
             <div class="quote-card">
-                「中大型場地的氣勢，能讓來訪的新朋友心生嚮往與溫馨。」
+                <span class="date-badge">2026/08/12</span><br>
+                本案已行文寄給區公所查詢——本案舊活動中心拆除案件。
             </div>
             <div class="quote-card">
-                「這是一份傳承，希望未來的大仙紀念館，也能讓後學們永遠心存感恩。」
+                <span class="date-badge">2026/09/10</span><br>
+                區公所答覆：9月10日前會行文通知本案拆除事宜。
             </div>
         </div>
 
@@ -538,12 +695,12 @@
         <h2>當前工程募款進度</h2>
         
         <div class="current-amount">
-            目前累計金額：<span style="color:#C0392B; font-size:34px; font-weight: bold;"> 10,506,996 元</span> <span>(慶祝破千萬！更新於 8/1)</span>
+            目前累計金額：<span style="color:#C0392B; font-size:34px; font-weight: bold;"> 10,814,132 元</span> <span>(更新於 9/1)</span>
         </div>
         <br>
         <div class="progress-container">
             <div class="progress-bar-bg">
-                <div class="progress-fill" style="width: 35.1%;"></div>
+                <div class="progress-fill" style="width: 36%;"></div>
             </div>
 
             <div class="milestone m-start" style="left: 33.3%;">
@@ -612,6 +769,38 @@
         </div>
     </section>
 
+    <!-- 青年團中秋義賣特別企劃區塊 -->
+    <div class="midautumn-section">
+        <div class="midautumn-bg-glow"></div>
+
+        <div class="midautumn-content">
+            <span class="midautumn-badge">
+                🌕 中秋特別企劃
+            </span>
+            <h2 class="midautumn-title">
+                毓佛青年團「濟月酥」義賣
+            </h2>
+            <p class="midautumn-subtitle">
+                一份心意 ‧ 一份祝福 ‧ 一份慈悲
+            </p>
+            <p class="midautumn-text">
+                濟月酥是青年團手作的蔬食月餅。這不僅是一份中秋祝福，更是年輕世代將老師與前人們的慈悲延續下去的具體行動！<br><br>
+                <strong>本次義賣所得，將全數捐做「大仙紀念館及活動中心」建設基金。</strong><br>
+                邀請您品嚐青年團的溫暖手作，讓每一口香甜，化作砌成禮堂的一磚一瓦。
+            </p>
+            
+        </div>
+
+        <div class="midautumn-visual">
+            <div class="mooncake-icon">
+                🥮
+            </div>
+            <button class="midautumn-btn">
+                我要認購支持
+            </button>
+        </div>
+    </div>
+
     <!-- 多元捐款管道 -->
     <section>
         <h2>多元捐款管道</h2>
@@ -651,7 +840,7 @@
     <p>聯絡電話： (06) 723-5140</p>
 </footer>
 
-<!-- 靜態動態化 HTML5 腳本：自動旋轉漂浮心得牆 -->
+<!-- 靜態動態化 HTML5 腳本：自動旋轉漂浮動態牆 -->
 <script>
     let currentQuoteIndex = 0;
     const quotes = document.querySelectorAll('.quote-card');
@@ -677,10 +866,9 @@
 
     function resetTimer() {
         clearInterval(autoRotateTimer);
-        autoRotateTimer = setInterval(nextQuote, 4500); // 每4.5秒自動流暢輪播
+        autoRotateTimer = setInterval(nextQuote, 4500); 
     }
 
-    // 啟動自動輪播
     resetTimer();
 </script>
 
