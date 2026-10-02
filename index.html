@@ -7,19 +7,19 @@
     <style>
         /* --- 基礎設定與配色變數 --- */
         :root {
-            --bg-color: #F5F5DC;       /* 米色背景 */
-            --card-bg: #FFFAF0;        /* 奶油白區塊 */
+            --bg-color: #F5F5DC;       /* 溫暖米色背景 */
+            --card-bg: #FFFAF0;        /* 奶油白卡片背景 */
             --text-main: #2C3E50;      /* 深藍灰文字 */
             --accent-cyan: #E0F7FA;    /* 淺青色 */
             --accent-green: #A5D6A7;   /* 淺綠色 */
-            --btn-color: #4DB6AC;      /* 按鈕/重點色 */
+            --btn-color: #00897B;      /* 主題翡翠綠 */
             --border-color: #D7CCC8;   /* 邊框色 */
-            --celebrate-gold: #D4AF37; /* 慶典金色 */
-            --celebrate-red: #C0392B;  /* 慶典紅/喜慶色 */
+            --construction-orange: #D35400; /* 工程暖橙 */
+            --celebrate-red: #C0392B;  /* 喜慶硃砂紅 */
             
-            /* 字體大小設定 (符合大字體要求 >14pt) */
+            /* 大字體標準 (>14pt / 20px) */
             --font-base: 20px; 
-            --font-h1: 36px;
+            --font-h1: 34px;
             --font-h2: 28px;
         }
 
@@ -35,224 +35,326 @@
             color: var(--text-main);
             line-height: 1.8;
             font-size: var(--font-base);
-            padding-bottom: 50px;
+            padding-bottom: 60px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1040px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* --- 1. Hero 區塊 (藍圖背景) --- */
-        header {
-            background: linear-gradient(135deg, var(--bg-color) 25%, transparent 25%) -50px 0,
-                        linear-gradient(225deg, var(--bg-color) 25%, transparent 25%) -50px 0,
-                        linear-gradient(315deg, var(--bg-color) 25%, transparent 25%),
-                        linear-gradient(45deg, var(--bg-color) 25%, transparent 25%);
-            background-size: 100px 100px;
-            background-color: #EFEBE9;
-            position: relative;
-            text-align: center;
-            padding: 70px 20px 60px 20px;
-            border-bottom: 5px solid var(--accent-green);
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(77, 182, 172, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(77, 182, 172, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: moveGrid 20s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes moveGrid {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(40px, 40px); }
-        }
-
-        header h1 {
-            font-size: var(--font-h1);
-            font-weight: bold;
-            position: relative;
-            z-index: 2;
-            text-shadow: 2px 2px 0px #fff;
-            margin-bottom: 10px;
-        }
-        
-        header p {
-            position: relative;
-            z-index: 2;
-            font-size: 22px;
-            color: #555;
-            background: rgba(255,255,255,0.7);
-            display: inline-block;
-            padding: 6px 20px;
+        /* --- 1. 置頂標題與 YouTube 3D 模擬動畫主視覺 --- */
+        .hero-section {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F0F4F8 100%);
             border-radius: 20px;
+            padding: 35px 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #E2E8F0;
+            text-align: center;
         }
 
-        /* --- 喜慶熱烈公告卡片 --- */
-        .celebration-banner {
-            background: linear-gradient(135deg, #FFF9E6 0%, #FFF0D4 100%);
-            border: 2px solid #F39C12;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0 10px 0;
-            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.15);
-            position: relative;
-            overflow: hidden;
+        .hero-title {
+            font-size: var(--font-h1);
+            color: #1A365D;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
-        .celebration-badge {
+        .hero-subtitle {
+            font-size: 22px;
+            color: #00796B;
+            font-weight: 600;
             display: inline-block;
-            background-color: var(--celebrate-red);
-            color: #FFF;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 6px 18px;
+            background: #E0F2F1;
+            padding: 5px 22px;
             border-radius: 30px;
-            box-shadow: 0 3px 8px rgba(192, 57, 43, 0.3);
-            margin-bottom: 15px;
-            animation: pulse 2s infinite;
+            margin-bottom: 25px;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+        /* 16:9 YouTube 響應式容器 */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 77, 64, 0.2);
+            border: 4px solid #FFFFFF;
+            background-color: #000;
         }
 
-        .celebration-title {
-            font-size: 28px;
-            color: #B7950B;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #FFF;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 16px;
+            backdrop-filter: blur(5px);
+            z-index: 2;
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 8px;
+            pointer-events: none;
         }
 
-        .event-box {
-            background: rgba(255,255,255,0.85);
-            border-left: 6px solid #E67E22;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        .video-badge::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseDot 1.5s infinite;
         }
 
-        .event-box h3 {
-            font-size: 24px;
+        @keyframes pulseDot {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .video-caption {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #546E7A;
+            font-style: italic;
+        }
+
+        /* --- 2. 10月工程重大進展：9/22 舊建物拆除工程開工 --- */
+        .milestone-announcement {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFE0B2 100%);
+            border-left: 8px solid var(--construction-orange);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 35px 0;
+            box-shadow: 0 6px 20px rgba(211, 84, 0, 0.12);
+        }
+
+        .announcement-tag {
+            background: var(--construction-orange);
+            color: #FFF;
+            font-size: 19px;
+            font-weight: bold;
+            padding: 5px 16px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .announcement-title {
+            font-size: 28px;
+            color: #A04000;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .announcement-body {
+            font-size: 21px;
+            color: #4E342E;
+            line-height: 1.8;
+        }
+
+        .schedule-note {
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 12px 18px;
+            border-radius: 8px;
+            border-left: 4px solid #E67E22;
+            font-size: 18px;
+            color: #795548;
+        }
+
+        /* --- 3. 財務收支透明公開卡片 --- */
+        .finance-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #E0F2F1;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+        }
+
+        .finance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .finance-item {
+            background: #F9FBFC;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #CFD8DC;
+            text-align: center;
+        }
+
+        .finance-item.highlight {
+            background: #E8F5E9;
+            border-color: #81C784;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+        }
+
+        .finance-label {
+            font-size: 18px;
+            color: #546E7A;
+            margin-bottom: 8px;
+        }
+
+        .finance-num {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1A365D;
+        }
+
+        .finance-num.growth {
+            color: #2E7D32;
+        }
+
+        .finance-num.primary {
             color: #C0392B;
-            margin-bottom: 10px;
+            font-size: 34px;
         }
 
-        /* --- 募資進度動態報告牆 (HTML5 互動動畫) --- */
+        /* --- 4. 募資進度條區塊 --- */
+        .progress-box {
+            position: relative;
+            margin: 50px 0 30px 0;
+        }
+
+        .progress-bar-bg {
+            background-color: #ECEFF1;
+            height: 42px;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.12);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #81C784, #4DB6AC, #00897B);
+            height: 100%;
+            width: 38%; /* 11,396,668 / 30,000,000 ≈ 38% */
+            border-radius: 25px 0 0 25px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .milestone-marker {
+            position: absolute;
+            top: -60px;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .milestone-marker::after {
+            content: '▼';
+            display: block;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .m-phase1 {
+            left: 33.3%;
+            color: #C0392B;
+        }
+
+        .m-phase1::after { color: #C0392B; }
+
+        .m-final {
+            right: 0;
+            transform: translateX(0);
+            color: #155724;
+        }
+
+        .m-final::after { color: #155724; }
+
+        .progress-status-badge {
+            background: #E8F8F5;
+            border: 1px solid #A3E4D7;
+            color: #00796B;
+            text-align: center;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* --- 5. 動態漂浮感言 (HTML5) --- */
         .floating-quotes-section {
             background: linear-gradient(180deg, #E0F7FA 0%, #E8F5E9 100%);
             border: 2px dashed #4DB6AC;
-            border-radius: 15px;
-            padding: 30px 25px;
-            margin: 30px 0;
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin: 35px 0;
             text-align: center;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             overflow: hidden;
         }
 
         .floating-title {
             font-size: 22px;
-            font-weight: bold;
+            font-weight: 700;
             color: #00695C;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .bubble-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .bubble {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            animation: floatUp 8s infinite ease-in-out;
-        }
-        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 7s; }
-        .bubble:nth-child(2) { width: 25px; height: 25px; left: 85%; animation-duration: 9s; animation-delay: 2s; }
-        .bubble:nth-child(3) { width: 50px; height: 50px; left: 70%; animation-duration: 11s; animation-delay: 1s; }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100px) scale(0.8); opacity: 0; }
-            50% { opacity: 0.6; }
-            100% { transform: translateY(-80px) scale(1.1); opacity: 0; }
         }
 
         .quote-ticker-container {
             position: relative;
-            min-height: 160px; /* 增加高度以容納較長的會議紀錄 */
+            min-height: 110px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2;
         }
 
         .quote-card {
             position: absolute;
             width: 100%;
-            max-width: 850px;
-            padding: 20px 30px;
+            max-width: 860px;
+            padding: 18px 25px;
             background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,105,92,0.1);
-            font-size: 20px;
+            font-size: 21px;
             color: #004D40;
             font-weight: 500;
-            line-height: 1.6;
             opacity: 0;
-            transform: translateY(20px) scale(0.96);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(15px);
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
             pointer-events: none;
-        }
-
-        .date-badge {
-            display: inline-block;
-            background-color: #00796B;
-            color: #FFFFFF;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .quote-card.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
             pointer-events: auto;
-            animation: floatGently 4s ease-in-out infinite alternate;
+            animation: gentleFloat 4s ease-in-out infinite alternate;
         }
 
-        @keyframes floatGently {
+        @keyframes gentleFloat {
             0% { transform: translateY(0px); }
-            100% { transform: translateY(-6px); }
+            100% { transform: translateY(-5px); }
         }
 
         .quote-dots {
@@ -260,8 +362,6 @@
             justify-content: center;
             gap: 10px;
             margin-top: 15px;
-            z-index: 2;
-            position: relative;
         }
 
         .dot {
@@ -270,7 +370,7 @@
             background-color: #B2DFDB;
             border-radius: 50%;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: 0.3s;
         }
 
         .dot.active {
@@ -278,152 +378,12 @@
             transform: scale(1.3);
         }
 
-        /* --- 中秋義賣特別企劃 (北歐木質調 x 中秋光暈) --- */
-        .midautumn-section {
-            background: linear-gradient(135deg, #FFF9E6 0%, #FCEABB 100%);
-            border: 2px solid #F3D186;
-            border-radius: 15px;
-            padding: 40px;
-            margin: 40px 0;
-            box-shadow: 0 10px 25px rgba(217, 108, 74, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-            gap: 30px;
-        }
-        
-        .midautumn-bg-glow {
-            position: absolute;
-            top: -60px;
-            right: -60px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .midautumn-content {
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .midautumn-badge {
-            background-color: #D96C4A;
-            color: #FFF;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .midautumn-title {
-            font-size: 34px;
-            color: #4A3F35;
-            font-weight: bold;
-            margin-bottom: 15px;
-            border: none;
-            padding-left: 0;
-            font-family: serif;
-        }
-        
-        .midautumn-subtitle {
-            font-size: 22px;
-            color: #D96C4A;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .midautumn-text {
-            font-size: 20px;
-            color: #6B5E55;
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-        
-        .midautumn-account-box {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid #E8DCC4;
-            padding: 20px;
-            border-radius: 12px;
-            display: inline-block;
-            backdrop-filter: blur(4px);
-        }
-        
-        .account-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #8BA888;
-            margin-bottom: 8px;
-        }
-        
-        .account-number {
-            font-size: 22px;
-            color: #4A3F35;
-            font-family: monospace;
-            font-weight: bold;
-        }
-        
-        .account-name {
-            font-size: 16px;
-            color: #6B5E55;
-            margin-top: 5px;
-        }
-        
-        .midautumn-visual {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1;
-            min-width: 200px;
-        }
-        
-        .mooncake-icon {
-            width: 140px;
-            height: 140px;
-            background: #FFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            border: 5px solid #F3D186;
-            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05), 0 4px 15px rgba(243, 209, 134, 0.4);
-            margin-bottom: 20px;
-        }
-        
-        .midautumn-btn {
-            background: #8BA888;
-            color: #FFF;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 12px 30px;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(139, 168, 136, 0.3);
-            width: 100%;
-        }
-        
-        .midautumn-btn:hover {
-            background: #728E6F;
-            transform: translateY(-2px);
-        }
-
-        /* --- 通用 Section 卡片樣式 --- */
+        /* --- 6. 通用區塊卡片 --- */
         section {
             background: var(--card-bg);
             margin: 40px 0;
-            padding: 40px;
-            border-radius: 15px;
+            padding: 35px;
+            border-radius: 18px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
         }
@@ -431,137 +391,73 @@
         h2 {
             font-size: var(--font-h2);
             color: #00695C;
-            border-left: 8px solid var(--accent-green);
+            border-left: 8px solid var(--btn-color);
             padding-left: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
-        /* --- 募資進度條區塊 --- */
-        .progress-container {
-            position: relative;
-            margin: 50px 0;
-        }
-
-        .progress-bar-bg {
-            background-color: #E0E0E0;
-            height: 40px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #A5D6A7, #4DB6AC, #26A69A);
-            height: 100%;
-            width: 36%; /* 10814132 / 30000000 約等於 36% */
-            border-radius: 20px 0 0 20px;
-            transition: width 1.2s ease-in-out;
-            position: relative;
-            background-size: 200% 100%;
-            animation: shimmer 3s infinite linear;
-        }
-
-        .milestone {
-            position: absolute;
-            top: -45px;
-            transform: translateX(-50%);
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        .milestone::after {
-            content: '▼';
-            display: block;
-            color: #888;
-            margin-top: 5px;
-        }
-
-        .m-start { left: 33.3%; color: #C0392B; }
-        .m-end { right: 0; transform: translateX(0); color: #2E7D32; }
-
-        .current-amount {
-            font-size: 24px;
-            color: var(--btn-color);
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .gap-info {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 18px;
-            color: #27AE60;
-            background: #E8F8F5;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #A3E4D7;
-        }
-
-        /* --- 故事牆 / 見證區卡片 --- */
+        /* 故事牆 */
         .story-card {
             background: #FFFFFF;
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 14px;
             border-left: 6px solid #4DB6AC;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            margin-top: 20px;
         }
 
         .story-title {
-            font-size: 26px;
+            font-size: 25px;
             color: #00695C;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-weight: 800;
+            margin-bottom: 18px;
             border-bottom: 2px dashed #E0F7FA;
             padding-bottom: 10px;
         }
 
-        .story-text p {
-            margin-bottom: 18px;
-            font-size: 20px;
-            color: #34495E;
-        }
-
         .story-quote {
             background: #F4FBFB;
-            padding: 18px 22px;
+            padding: 16px 20px;
             border-radius: 8px;
             border-left: 4px solid #26A69A;
             margin: 15px 0;
-            font-style: normal;
+            color: #004D40;
+            font-weight: 500;
         }
 
-        /* --- 建築圖展示 --- */
+        /* 建築相簿 */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
             gap: 20px;
         }
 
         .gallery-item {
             background: #fff;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             text-align: center;
-            border: 1px dashed var(--border-color);
+            border: 1px solid #ECEFF1;
             transition: transform 0.3s;
         }
 
         .gallery-item:hover {
             transform: translateY(-5px);
-            border-style: solid;
-            border-color: var(--accent-green);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
-        /* --- 捐款資訊區 --- */
+        .gallery-item img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* 捐款資訊區 */
         .donation-flex {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
-            justify-content: space-between;
         }
 
         .bank-info {
@@ -571,53 +467,51 @@
 
         .bank-details {
             background: #fff;
-            padding: 20px;
-            border-left: 5px solid var(--btn-color);
+            padding: 22px;
+            border-left: 6px solid var(--btn-color);
+            border-radius: 6px;
             font-size: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
         .qr-area {
             flex: 1;
-            min-width: 250px;
+            min-width: 260px;
             text-align: center;
             background: var(--accent-cyan);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .qr-placeholder {
-            width: 200px;
-            height: 200px;
-            background: #fff;
-            margin: 0 auto 10px auto;
-            border: 2px solid #ccc;
+            padding: 25px;
+            border-radius: 12px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
+        .qr-placeholder {
+            width: 210px;
+            height: 210px;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
-            color: #777;
-            font-size: 16px;
-            border-top: 1px solid #ddd;
-            margin-top: 40px;
+            padding: 30px 20px;
+            color: #78909C;
+            font-size: 17px;
+            border-top: 1px solid #CFD8DC;
+            margin-top: 50px;
         }
 
         @media (max-width: 768px) {
-            .milestone { font-size: 14px; top: -55px; }
+            .hero-title { font-size: 26px; }
+            .finance-num { font-size: 25px; }
+            .milestone-marker { font-size: 13px; top: -65px; }
             .donation-flex { flex-direction: column; }
-            header h1 { font-size: 28px; }
-            .celebration-title { font-size: 22px; }
-            .quote-card { font-size: 18px; padding: 15px; }
-            
-            .midautumn-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            .midautumn-title { font-size: 28px; }
-            .midautumn-account-box { display: block; }
+            .announcement-title { font-size: 23px; }
         }
     </style>
 </head>
@@ -625,64 +519,106 @@
 
 <div class="container">
 
-    <header>
-        <h1>毓佛活動中心暨大仙紀念館<br>興建工程</h1>
-        <p>凝聚善念 · 共築福田</p>
+    <!-- 1. 主視覺：置頂 YouTube 3D 模擬動畫展演 -->
+    <header class="hero-section">
+        <h1 class="hero-title">毓佛活動中心暨大仙紀念館 興建工程</h1>
+        <div class="hero-subtitle">✨ 凝聚善念 · 萬眾共築白宮禮堂</div>
+
+        <!-- 響應式 16:9 YouTube 嵌入區塊 -->
+        <div class="video-container">
+            <div class="video-badge">3D 建築模擬實境展演</div>
+            <!-- 請將下方的 YOUR_YOUTUBE_VIDEO_ID 替換成您的 YouTube 影片 ID -->
+<iframe width="1337" height="752" src="https://www.youtube.com/embed/QL_dHvi_S8M" title="毓佛活動中心暨大仙紀念館3D模擬動畫" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                   </div>
+        <p class="video-caption">▲ 未來活動中心暨大仙紀念館 3D 全景模擬動畫，勾勒莊嚴宏偉的新道務基地</p>
     </header>
 
-    <!-- 喜慶公告區塊 -->
-    <div class="celebration-banner">
-        <span class="celebration-badge">🎉 喜報滿門 · 感恩迴響</span>
-        <div class="celebration-title">
-            <span>歡慶募資突破千萬大關！</span>
+    <!-- 2. 10月工程重大進展：9/22 舊建物拆除工程開工 -->
+    <div class="milestone-announcement">
+        <span class="announcement-tag">🚧 10 月最新進度快報</span>
+        <div class="announcement-title">
+            第一階段突破千萬動工門檻！舊建物拆除工程正式啟動
         </div>
-        <p style="font-size: 22px; color: #5D4037; margin-bottom: 10px;">
-            誠摯分享最新建案進度與活動資訊，希望感動更多人發善心、共襄盛舉！
-        </p>
-
-        <!-- 中秋連假晚會預告 -->
-        <div class="event-box">
-            <h3>🌕 節目精彩預告：中秋連假晚會</h3>
-            <p><strong>時間：</strong>9/25(五) 中秋連假第一天晚會</p>
-            <p><strong>大戲上演：</strong>中秋大戲《古井運木》濟公傳</p>
-            <p style="margin-top: 8px; color: #795548; font-weight: 500;">
-                歡迎闔家蒞臨觀賞，心存善念捐助善款，人人都可以是海陸空富貴版圖皆收容的張員外！
-            </p>
+        <div class="announcement-body">
+            感恩十方善信大德發心護持！第一階段募資已順利突破千萬門檻，<strong>9 月 22 日莊壇主已正式開工執行「舊建物拆除工程」</strong>，除舊佈新迎接未來新殿堂！<br>
+            象徵邁出築建「白宮禮堂」至關重要的一大步，誠摯邀請大家持續攜手同行，共創下一個三十年！
+        </div>
+        <div class="schedule-note">
+            📌 <strong>工程備忘：</strong>待毓佛宮道務會議商議「基地整理工程」與「動工典禮」舉行時間。
         </div>
     </div>
 
-    <!-- 募資進度動態報告牆 (HTML5 互動動畫) -->
-    <div class="floating-quotes-section">
-        <div class="bubble-bg">
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
+    <!-- 3. 善款財務結算與工程進度 -->
+    <section>
+        <h2>募款進度與善款結算報告</h2>
+
+     <!-- 財務數據統計卡片 -->
+        <div class="finance-card">
+            <div style="font-weight: 700; color: #37474F; margin-bottom: 12px; font-size: 20px;">
+                📊 毓佛宮大仙紀念館暨活動中心財務明細（至 9/30 止）：
+            </div>
+            
+            <div class="finance-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div class="finance-item highlight">
+                    <div class="finance-label">9 月份單月新增差額</div>
+                    <div class="finance-num growth">+582,536 <span style="font-size:18px;">元</span></div>
+                    <small style="color:#2E7D32; font-weight:600;">（持續踴躍增長中）</small>
+                </div>
+
+                <div class="finance-item">
+                    <div class="finance-label">9 月份活動中心善款總額</div>
+                    <div class="finance-num primary">11,396,668 <span style="font-size:18px;">元</span></div>
+                </div>
+            </div>
         </div>
 
+        <!-- 募資進度條 -->
+        <div class="progress-box">
+            <div class="progress-bar-bg">
+                <div class="progress-fill" style="width: 38%;"></div>
+            </div>
+
+            <!-- 動工標記點 (1000萬) -->
+            <div class="milestone-marker m-phase1">
+                第一階段動工門檻<br>
+                <strong>1,000 萬元</strong><br>
+                <span style="color:#C0392B;">【已突破！9/22拆除動工】</span>
+            </div>
+
+            <!-- 完工標記點 (3000萬) -->
+            <div class="milestone-marker m-final">
+                總完工目標<br>
+                <strong>3,000 萬元</strong>
+            </div>
+        </div>
+
+        <div class="progress-status-badge">
+            🏆 <strong>當前達成率約 38.0%！</strong> 第一階段動工目標已達成，現正穩步邁向總完工目標 3,000 萬元。
+        </div>
+    </section>
+
+    <!-- 4. HTML5 動態漂浮感言牆 -->
+    <div class="floating-quotes-section">
         <div class="floating-title">
-            <span>✨ 募資進度動態報告牆</span>
+            💬 捐款人真心話 · 善念傳遞
         </div>
 
         <div class="quote-ticker-container" id="quoteContainer">
             <div class="quote-card active">
-                <span class="date-badge">2026/07/31</span><br>
-                狂賀募資進度突破 1000 萬元，好消息！
+                「當我看到白宮禮堂未來外觀示意圖與3D動畫的那一刻，心裡真的覺得這筆捐款太值得了！」
             </div>
             <div class="quote-card">
-                <span class="date-badge">2026/08/04</span><br>
-                週二晚上道務會議臨時動議，點傳師們拍板決議：「破一千萬了！我們往把舊白宮建物剷平，整治好蟲害工作，然後把動土的紅樁釘下去為起始目標！拆吧！動土吧！」
+                「9/22 舊建物拆除正式開工，心中滿是感動，期待新禮堂成為小天使與前賢們的溫暖家園。」
             </div>
             <div class="quote-card">
-                <span class="date-badge">2026/08/12</span><br>
-                本案已行文寄給區公所查詢——本案舊活動中心拆除案件。
+                「中大型場地的氣勢，能讓來訪的新朋友心生嚮往。這是一份世代交替的感恩與傳承。」
             </div>
             <div class="quote-card">
-                <span class="date-badge">2026/09/10</span><br>
-                區公所答覆：9月10日前會行文通知本案拆除事宜。
+                「心存善念捐善款，人人都可以是收容富貴福田的張員外，一同護持大仙紀念館！」
             </div>
         </div>
 
-        <div class="quote-dots" id="quoteDots">
+        <div class="quote-dots">
             <span class="dot active" onclick="setQuote(0)"></span>
             <span class="dot" onclick="setQuote(1)"></span>
             <span class="dot" onclick="setQuote(2)"></span>
@@ -690,34 +626,7 @@
         </div>
     </div>
 
-    <!-- 募資進度 -->
-    <section>
-        <h2>當前工程募款進度</h2>
-        
-        <div class="current-amount">
-            目前累計金額：<span style="color:#C0392B; font-size:34px; font-weight: bold;"> 10,814,132 元</span> <span>(更新於 9/1)</span>
-        </div>
-        <br>
-        <div class="progress-container">
-            <div class="progress-bar-bg">
-                <div class="progress-fill" style="width: 36%;"></div>
-            </div>
-
-            <div class="milestone m-start" style="left: 33.3%;">
-                第一階段：動土門檻<br><span style="color:#27AE60;">(已順利達標！)</span><br>1,000 萬元
-            </div>
-
-            <div class="milestone m-end">
-                總完工目標<br>3,000 萬元
-            </div>
-        </div>
-
-        <div class="gap-info">
-            🎉 <strong>第一階段動土門檻 1,000 萬已順利突破！</strong> 朝向總目標 3,000 萬元持續邁進！
-        </div>
-    </section>
-
-    <!-- 捐款人故事牆 / 見證區 -->
+    <!-- 5. 捐款人故事牆 / 見證區 -->
     <section>
         <h2>捐款人故事牆 / 見證區</h2>
         
@@ -725,110 +634,73 @@
             <div class="story-title">
                 【看見未來的三十年，為小天使與長輩築一個家】
             </div>
-            <div class="story-text">
-                <p>
-                    走過三十週年，看著毓佛宮的道務日益繁盛，每場活動動輒破百人，原有的二樓大殿早已不敷使用。
-                </p>
-                <div class="story-quote">
-                    「當我看到白宮禮堂未來外觀示意圖的那一刻，心裡真的覺得這筆捐款太值得了！」捐款人感動地分享。
-                </div>
-                <p>
-                    她期待禮堂落成後，不僅能讓小天使們有一個快樂學習的空間，更重要的是，讓那些資深、行動不便的前賢們，能擁有更舒適、無礙的活動動線。
-                </p>
-                <div class="story-quote">
-                    「中大型場地的氣勢，能讓來訪的新朋友心生嚮往與溫馨。這是一份傳承，希望未來的大仙紀念館，也能讓後學們永遠心存感恩。」
-                </div>
+            <p style="margin-bottom: 16px;">
+                走過三十週年，看著毓佛宮的道務日益繁盛，每場活動動輒破百人，原有的二樓大殿早已不敷使用。
+            </p>
+            <div class="story-quote">
+                「當我看到白宮禮堂未來外觀示意圖的那一刻，心裡真的覺得這筆捐款太值得了！」捐款人感動地分享。
+            </div>
+            <p style="margin-bottom: 16px;">
+                她期待禮堂落成後，不僅能讓小天使們有一個快樂學習的空間，更重要的是，讓那些資深、行動不便的前賢們，能擁有更舒適、無礙的活動動線。
+            </p>
+            <div class="story-quote">
+                「中大型場地的氣勢，能讓來訪的新朋友心生嚮往與溫馨。這是一份傳承，希望未來的大仙紀念館，也能讓後學們永遠心存感恩。」
             </div>
         </div>
     </section>
 
-    <!-- 建築藍圖與 3D 設計 -->
+    <!-- 6. 建築外觀與平面設計圖 -->
     <section>
-        <h2>建築藍圖與 3D 設計</h2>
-
-        <p style="margin-bottom: 20px;">這是一座融合現代與傳統的複合式建築空間設計。</p>
+        <h2>建築外觀與各樓層配置圖</h2>
+        <p style="margin-bottom: 20px; color: #5D6D7E;">融合莊嚴弘道、講學、集會與無障礙動線的現代複合式建築規劃：</p>
 
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image1.jpg" 
-                     alt="3D 外觀設計圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
-                <p>活動中心外觀示意</p>
+                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image1.jpg" alt="白宮禮堂外觀示意圖">
+                <p><strong>活動中心外觀示意</strong></p>
             </div>
 
             <div class="gallery-item">
-                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image2.jpg" 
-                     alt="外觀設計圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
-                <p>外觀設計圖停車空間</p>
+                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image2.jpg" alt="停車與周邊規劃">
+                <p><strong>外觀設計與停車空間</strong></p>
             </div>
 
             <div class="gallery-item">
-                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image3.jpg" 
-                     alt="二樓平面藍圖" style="width:100%; height:250px; object-fit:cover; border-radius:5px; margin-bottom:15px;">
-                <p>外觀設計圖</p>
+                <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image3.jpg" alt="外觀整體透視圖">
+                <p><strong>日照景觀透視圖</strong></p>
             </div>
         </div>
     </section>
 
-    <!-- 青年團中秋義賣特別企劃區塊 -->
-    <div class="midautumn-section">
-        <div class="midautumn-bg-glow"></div>
-
-        <div class="midautumn-content">
-            <span class="midautumn-badge">
-                🌕 中秋特別企劃
-            </span>
-            <h2 class="midautumn-title">
-                毓佛青年團「濟月酥」義賣
-            </h2>
-            <p class="midautumn-subtitle">
-                一份心意 ‧ 一份祝福 ‧ 一份慈悲
-            </p>
-            <p class="midautumn-text">
-                濟月酥是青年團手作的蔬食月餅。這不僅是一份中秋祝福，更是年輕世代將老師與前人們的慈悲延續下去的具體行動！<br><br>
-                <strong>本次義賣所得，將全數捐做「大仙紀念館及活動中心」建設基金。</strong><br>
-                邀請您品嚐青年團的溫暖手作，讓每一口香甜，化作砌成禮堂的一磚一瓦。
-            </p>
-            
-        </div>
-
-        <div class="midautumn-visual">
-            <div class="mooncake-icon">
-                🥮
-            </div>
-            <button class="midautumn-btn">
-                我要認購支持
-            </button>
-        </div>
-    </div>
-
-    <!-- 多元捐款管道 -->
+    <!-- 7. 護持捐款管道 -->
     <section>
-        <h2>多元捐款管道</h2>
+        <h2>發心護持 · 捐款管道</h2>
         <div class="donation-flex">
             
             <div class="bank-info">
-                <h3>銀行匯款</h3>
-                <p>請確認以下帳號資訊：</p>
+                <h3 style="margin-bottom: 12px; color: #00796B;">郵政劃撥 / 銀行匯款</h3>
                 <div class="bank-details">
-                    <p><strong>銀行代碼：</strong> 700 (中華郵政)</p>
+                    <p><strong>金融機構代碼：</strong> 700 (中華郵政)</p>
                     <p><strong>帳戶名稱：</strong> 陳美鑾</p>
                     <p><strong>匯款帳號：</strong> 01913350007762</p>
                 </div>
                 
-                <h3 style="margin-top:20px;">收款存摺封面</h3>
-                <div class="bank-details" style="padding: 10px; background-color: #fff; text-align: center;">
+                <h3 style="margin-top:25px; margin-bottom: 10px; color: #00796B;">收款存摺明細檢視</h3>
+                <div style="background-color: #fff; padding: 10px; text-align: center; border-radius: 8px; border: 1px solid #CFD8DC;">
                     <img src="https://raw.githubusercontent.com/songibook-zoe/baigong.funding/main/image4.jpg" 
                          alt="收款存摺封面" 
-                         style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                         style="max-width: 100%; height: auto; border-radius: 5px;">
                 </div>
             </div>
 
             <div class="qr-area">
-                <h3>數位支付 / 掃碼捐款</h3>
+                <h3 style="margin-bottom: 12px; color: #004D40;">台灣 Pay 掃碼捐款</h3>
                 <div class="qr-placeholder">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TWQRP%3A%2F%2F700NTTransfer%2F158%2F02%2FV1%3FD6%3D0001913350007762%26D5%3D700%26D10%3D901" alt="QR Code">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=190x190&data=TWQRP%3A%2F%2F700NTTransfer%2F158%2F02%2FV1%3FD6%3D0001913350007762%26D5%3D700%26D10%3D901" 
+                         alt="台灣 Pay QR Code" style="width: 100%; height: 100%;">
                 </div>
-                <p>支援 台灣 Pay</p>
+                <p style="font-weight: bold; color: #004D40; margin-top: 5px;">支援各大行動網銀掃碼</p>
+                <small style="color: #555;">匯款後請向委員會出納確認徵信芳名</small>
             </div>
         </div>
     </section>
@@ -837,10 +709,10 @@
 
 <footer>
     <p>© 2026 毓佛活動中心暨大仙紀念館興建工程委員會</p>
-    <p>聯絡電話： (06) 723-5140</p>
+    <p>聯絡電話： (06) 723-5140 | 共襄善舉，功德無量</p>
 </footer>
 
-<!-- 靜態動態化 HTML5 腳本：自動旋轉漂浮動態牆 -->
+<!-- HTML5 動態腳本：感言輪播 -->
 <script>
     let currentQuoteIndex = 0;
     const quotes = document.querySelectorAll('.quote-card');
@@ -855,7 +727,6 @@
         currentQuoteIndex = index;
         quotes[currentQuoteIndex].classList.add('active');
         dots[currentQuoteIndex].classList.add('active');
-        
         resetTimer();
     }
 
@@ -866,7 +737,7 @@
 
     function resetTimer() {
         clearInterval(autoRotateTimer);
-        autoRotateTimer = setInterval(nextQuote, 4500); 
+        autoRotateTimer = setInterval(nextQuote, 4500);
     }
 
     resetTimer();
